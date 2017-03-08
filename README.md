@@ -15,6 +15,6 @@
 			json.scripts.start = 'node exportsC.js';
 			return json;
 		});
-		builder.npmUpdate(); //this should add the 
-		builder.shell('ECHO >> exportsD.js');
-		builder.removeFolder();
+		builder.npmUpdate(); //this should add the dependency
+		builder.shell('ECHO >> exportsD.js'); //just do a shell command to show it operates on the target folder
+		builder.removeFolder(); //remove the target folder
