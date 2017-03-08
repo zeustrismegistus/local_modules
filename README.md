@@ -2,8 +2,8 @@
 
 	sample usage:
 	
-		var builderFactory = require('./../serviceBuilder.js').ServiceBuilder;
-		builder = builderFactory('./generatedService');
+		var builderFactory = require('./../moduleBuilder.js').ModuleBuilder;
+		builder = builderFactory('./generatedModule');
 		builder.initFolder();
 		builder.setName('tempService');
 		builder.hasFile('exportsA.js', 'module.exports.A = "a";console.log("hello from exportsA");');
