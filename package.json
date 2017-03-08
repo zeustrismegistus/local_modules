@@ -1,12 +1,12 @@
 {
   "name": "nodeServiceBuilder",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "builds node modules programmatically",
-  "main": "serviceBuilder.js",
+  "main": "moduleBuilder.js",
   "scripts": {
-    "start": "node serviceBuilder.js",
-    "debug-start-v8": "nodemon serviceBuilder.js --inspect --debug-brk",
-	"debug-start": "node --debug-brk serviceBuilder.js --debug=5858",
+    "start": "node moduleBuilder.js",
+    "debug-start-v8": "nodemon moduleBuilder.js --inspect --debug-brk",
+	"debug-start": "node --debug-brk moduleBuilder.js --debug=5858",
  	"inspector": "node ./node_modules/node-inspector/bin/inspector.js ",
     "inspectorclient": "start chrome http://127.0.0.1:8080/?port=5858",
     "debug": "start npm run debug-start && start npm run inspector &&  npm run inspectorclient",   
