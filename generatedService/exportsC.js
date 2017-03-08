@@ -1,1 +1,0 @@
-var a = require("exportsA"); var b = require("exportsB"); console.log("hello from exportsC");

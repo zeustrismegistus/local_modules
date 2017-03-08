@@ -1,1 +1,0 @@
-{"name":"tempService","version":"0.0.0","description":"","main":"exportsC.js","scripts":{"start":"node exportsC.js"},"author":"","dependencies":{},"files":["exportsA.js","exportsB.js","exportsC.js"]}

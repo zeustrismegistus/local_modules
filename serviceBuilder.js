@@ -2,12 +2,8 @@
 const fs = require('fs-extra');
 const path = require('path');
 const shell = require('shelljs');
-const Command = require('command-promise');
+const pify = require('pify');
 
-// const express = require('express');
-
-// var app = express();
-// app.listen(9934, ()=>{console.log('up');});
 
 /*
 	sample usage:
@@ -27,7 +23,6 @@ const Command = require('command-promise');
 		//we build and demo
 		builder.removeSelf();
 */
-//debugger
 
 function ServiceBuilder (targetFolder, runtimeSourceFolder)
 {
@@ -35,7 +30,9 @@ function ServiceBuilder (targetFolder, runtimeSourceFolder)
 	var __self = this;
 	var __origDir = shell.pwd();
 	
-	var initFolder = function()
+	//behaviour
+	this.folder = targetFolder;
+	this.initFolder = function()
 	{
 		console.log('ServiceBuilder initializing on ' + targetFolder);
 		
@@ -71,12 +68,8 @@ function ServiceBuilder (targetFolder, runtimeSourceFolder)
 		fs.writeFileSync(targetFolder + '/package.json' , JSON.stringify(packageJSON));
 		
 		console.log('ServiceBuilder initialized on ' + targetFolder);
-		
+		return __self;
 	};
-	initFolder();
-	
-	//behaviour
-	this.folder = targetFolder;
 	this.editPackage = function(editJSONFn)
 	{
 		if(!editJSONFn)
@@ -141,21 +134,44 @@ function ServiceBuilder (targetFolder, runtimeSourceFolder)
 	//npm calls
 	this.npmUpdate = function()
 	{
-		return this.shell("cd " + targetFolder)
-		.then(Command.so("npm update"));
+		return this.shell("npm update");
 	};
 	
-	//shell calls
+	//shell calls - they always execute from the target directory. synchronously
+	//note: using exec under the hood, so the commands have to be compatible with the underlying fs
 	this.shell = function(command, options)
 	{
-		return Command(command, options); //returns a promise
+		try
+		{
+			//move to the target folder
+			shell.pushd(targetFolder);
+		
+			//do some stuff
+			var rv = shell.exec(command, options);
+			if(rv.stderr)
+				throw rv.stderr;
+			
+			return rv.stdout;
+		}
+		catch(e){
+			throw e;
+		}
+		finally
+		{
+			//go back to the original folder
+			shell.popd();
+		}
 	};
 	
-	this.removeSelf = function()
+	this.removeFolder = function()
 	{
-		//todo: fix this to do the actual implementation
-		return this.shell("echo " + targetFolder);
-	}
+		//clear the target
+		fs.emptyDirSync(targetFolder);
+		
+		fs.rmdirSync(targetFolder);
+		
+		return __self;
+	};
 }
 
 (()=>{
