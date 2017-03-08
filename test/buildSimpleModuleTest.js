@@ -11,7 +11,7 @@ const expect = Code.expect;
 const fs = require('fs-extra');
 const path = require('path');
 
-var builderFactory = require('./../serviceBuilder.js').ServiceBuilder;
+var builderFactory = require('./../moduleBuilder.js').ModuleBuilder;
 
 describe('creating and interacting with a generated node service', () => {
 
@@ -19,7 +19,7 @@ describe('creating and interacting with a generated node service', () => {
 
     before((done) => {
  
-		builder = builderFactory('./generatedService');
+		builder = builderFactory('./generatedModule');
 		builder.initFolder();
 		builder.setName('tempService');
 		builder.hasFile('exportsA.js', 'module.exports.A = "a";console.log("hello from exportsA");');
@@ -49,9 +49,6 @@ describe('creating and interacting with a generated node service', () => {
 		var filePath = path.resolve(builder.folder, 'exportsD.js');
 		var exists = fs.existsSync(filePath);
 		expect(exists).to.equal(true);
-        
-		//try an npm update 
-		//builder.npmUpdate();
 	
         done();
     });

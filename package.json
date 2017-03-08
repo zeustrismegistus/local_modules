@@ -1,7 +1,7 @@
 {
   "name": "nodeServiceBuilder",
   "version": "1.0.0",
-  "description": "builds node services programmatically",
+  "description": "builds node modules programmatically",
   "main": "serviceBuilder.js",
   "scripts": {
     "start": "node serviceBuilder.js",
@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zeustrismegistus/nodeServiceBuilder"
+    "url": "https://github.com/zeustrismegistus/nodeModuleBuilder"
   },
   "bugs": {
-    "url": "https://github.com/zeustrismegistus/nodeServiceBuilder/issues"
+    "url": "https://github.com/zeustrismegistus/nodeModuleBuilder/issues"
   },
-  "homepage": "https://github.com/zeustrismegistus/nodeServiceBuilder",
+  "homepage": "https://github.com/zeustrismegistus/nodeModuleBuilder",
   "directories": {
     "test": "test"
   }

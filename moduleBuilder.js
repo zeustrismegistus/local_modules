@@ -8,8 +8,8 @@ const pify = require('pify');
 /*
 	sample usage:
 	
-		var builderFactory = require('./../serviceBuilder.js').ServiceBuilder;
-		builder = builderFactory('./generatedService');
+		var builderFactory = require('./../moduleBuilder.js').ModuleBuilder;
+		builder = builderFactory('./generatedModule');
 		builder.initFolder();
 		builder.setName('tempService');
 		builder.hasFile('exportsA.js', 'module.exports.A = "a";console.log("hello from exportsA");');
@@ -26,7 +26,7 @@ const pify = require('pify');
 		builder.removeFolder();
 */
 
-function ServiceBuilder (targetFolder, runtimeSourceFolder)
+function ModuleBuilder (targetFolder, runtimeSourceFolder)
 {
 	//privates
 	var __self = this;
@@ -36,7 +36,7 @@ function ServiceBuilder (targetFolder, runtimeSourceFolder)
 	this.folder = targetFolder;
 	this.initFolder = function()
 	{
-		console.log('ServiceBuilder initializing on ' + targetFolder);
+		console.log('ModuleBuilder initializing on ' + targetFolder);
 		
 		//create the target 
 		fs.ensureDirSync(targetFolder);
@@ -69,7 +69,7 @@ function ServiceBuilder (targetFolder, runtimeSourceFolder)
 			};
 		fs.writeFileSync(targetFolder + '/package.json' , JSON.stringify(packageJSON));
 		
-		console.log('ServiceBuilder initialized on ' + targetFolder);
+		console.log('ModuleBuilder initialized on ' + targetFolder);
 		return __self;
 	};
 	this.editPackage = function(editJSONFn)
@@ -177,19 +177,19 @@ function ServiceBuilder (targetFolder, runtimeSourceFolder)
 }
 
 (()=>{
-	ServiceBuilder.new = function(targetFolder, runtimeSourceFolder)
+	ModuleBuilder.new = function(targetFolder, runtimeSourceFolder)
 	{
-		return new ServiceBuilder(targetFolder, runtimeSourceFolder);
+		return new ModuleBuilder(targetFolder, runtimeSourceFolder);
 	};
 	
-	Object.freeze(ServiceBuilder);
+	Object.freeze(ModuleBuilder);
 })();
 
 
 
 module.exports = 
 {
-	ServiceBuilder :ServiceBuilder.new
+	ModuleBuilder :ModuleBuilder.new
 };
 
 
