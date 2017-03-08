@@ -1,32 +1,47 @@
 {
-  "name": "local_modules",
+  "name": "nodeServiceBuilder",
   "version": "1.0.0",
-  "description": "provides npm management helpers for local_modules",
-  "main": "service.js",
+  "description": "builds node services programmatically",
+  "main": "serviceBuilder.js",
   "scripts": {
-    "start": "node service.js"
+    "start": "node serviceBuilder.js",
+    "start-v8": "node serviceBuilder.js --inspect --debug",
+    "start-nim": "node serviceBuilder.js --inspect --debug",
+	
+    "test": "lab -t 100 -a code -L",
+    "test-debug": "node --debug-brk ./node_modules/.bin/lab -a code",
+    "test-cov-html": "lab -r html -o coverage.html -a code",
+	
+	"debug-start": "nodemon --debug-brk serviceBuilder.js --debug=5858",
+    "inspector": "node ./node_modules/node-inspector/bin/inspector.js ",
+    "inspectorclient": "start chrome http://127.0.0.1:8080/?port=5858",
+	"debug" : "start npm run debug-start && start npm run inspector &&  npm run inspectorclient",
+	"start-test" : "node --debug-brk ./test/buildSimpleModule.js --debug=5858",
+	"debug-test" : "start npm run start-test && start npm run inspector && npm run inspectorclient"
   },
   "author": "zeustrismegistus@tutanota.com",
   "license": "GPL3",
   "dependencies": {
-    "chokidar": "latest",
+    "code": "^4.0.0",
+    "command-promise": "^2.0.1",
+    "express": "^4.15.2",
     "fs-extra": "^2.0.0",
+    "lab": "^12.1.0",
     "node-inspector": "^0.12.8",
     "shelljs": "^0.7.6"
   },
-  "config": {
-	"debugPort": 5858,
-	"runDebugEnabled" : true, 
-	"runDebuggerService" : true, 
-	"runDebuggerClient" : true 
+  "devDependencies": {
+    "lab": "^12.1.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/zeustrismegistus/local_modules"
+    "url": "https://github.com/zeustrismegistus/nodeServiceBuilder"
   },
   "bugs": {
-    "url": "https://github.com/zeustrismegistus/local_modules/issues"
+    "url": "https://github.com/zeustrismegistus/nodeServiceBuilder/issues"
   },
-  "homepage": "https://github.com/zeustrismegistus/local_modules"
+  "homepage": "https://github.com/zeustrismegistus/nodeServiceBuilder",
+  "directories": {
+    "test": "test"
+  }
 }

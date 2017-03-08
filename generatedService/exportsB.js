@@ -1,0 +1,1 @@
+module.exports.B = "b";console.log("hello from exportsB");
