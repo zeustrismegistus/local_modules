@@ -2,8 +2,6 @@
 const fs = require('fs-extra');
 const path = require('path');
 const shell = require('shelljs');
-const pify = require('pify');
-
 
 /*
 	sample usage:
@@ -194,4 +192,4 @@ module.exports =
 
 
 
-console.log('ServiceBuilder up');
+console.log('ModuleBuilder up');
