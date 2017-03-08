@@ -7,21 +7,23 @@ const pify = require('pify');
 
 /*
 	sample usage:
-		
-		var builder = serviceBuilder.new(targetFolder, *optional* runtimeSourceFolder)  //and initializes with basic node runtime files
-		.setName('myModule')
-		.editPackage((json)=>{})
-		.hasDependency(depName)		//updates packageJSON
-		.hasFile(targetPath, contents) //updates packageJSON and writes file
-
-		//npm calls
-		builder.npmUpdate() //does an npm-update
-		
-		//general shell calls
-		builder.shell(command);
-			
-		//we build and demo
-		builder.removeSelf();
+	
+		var builderFactory = require('./../serviceBuilder.js').ServiceBuilder;
+		builder = builderFactory('./generatedService');
+		builder.initFolder();
+		builder.setName('tempService');
+		builder.hasFile('exportsA.js', 'module.exports.A = "a";console.log("hello from exportsA");');
+		builder.hasFile('exportsB.js', 'module.exports.B = "b";console.log("hello from exportsB");');
+		builder.hasFile('exportsC.js', 'var a = require("exportsA"); var b = require("exportsB"); console.log("hello from exportsC");');
+		builder.hasDependency('express', '^4.15.2');
+		builder.editPackage((json)=>{
+			json.main = 'exportsC.js';
+			json.scripts.start = 'node exportsC.js';
+			return json;
+		});
+		builder.npmUpdate(); //this should add the 
+		builder.shell('ECHO >> exportsD.js');
+		builder.removeFolder();
 */
 
 function ServiceBuilder (targetFolder, runtimeSourceFolder)

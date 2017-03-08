@@ -1,2 +1,20 @@
-# local_modules
-provides helper functions to manage "local modules" and integrate them with npm
+# Node Service Builder - provides helper methods for programmatically creating node services on a file system somewhere
+
+	sample usage:
+	
+		var builderFactory = require('./../serviceBuilder.js').ServiceBuilder;
+		builder = builderFactory('./generatedService');
+		builder.initFolder();
+		builder.setName('tempService');
+		builder.hasFile('exportsA.js', 'module.exports.A = "a";console.log("hello from exportsA");');
+		builder.hasFile('exportsB.js', 'module.exports.B = "b";console.log("hello from exportsB");');
+		builder.hasFile('exportsC.js', 'var a = require("exportsA"); var b = require("exportsB"); console.log("hello from exportsC");');
+		builder.hasDependency('express', '^4.15.2');
+		builder.editPackage((json)=>{
+			json.main = 'exportsC.js';
+			json.scripts.start = 'node exportsC.js';
+			return json;
+		});
+		builder.npmUpdate(); //this should add the 
+		builder.shell('ECHO >> exportsD.js');
+		builder.removeFolder();
