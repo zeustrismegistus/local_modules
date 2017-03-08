@@ -1,5 +1,5 @@
 {
-  "name": "nodeServiceBuilder",
+  "name": "nodeModuleBuilder",
   "version": "0.0.1",
   "description": "builds node modules programmatically",
   "main": "moduleBuilder.js",
