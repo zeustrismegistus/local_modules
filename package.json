@@ -1,5 +1,5 @@
 {
-  "name": "@zeustrismegistus/module-builder",
+  "name": "d__module-builder",
   "version": "0.0.1",
   "description": "builds node modules programmatically",
   "main": "moduleBuilder.js",
@@ -21,11 +21,9 @@
   "license": "GPL3",
   "dependencies": {
     "code": "^4.0.0",
-    "express": "^4.15.2",
     "fs-extra": "^2.0.0",
     "lab": "^12.1.0",
     "node-inspector": "^0.12.8",
-    "pify": "^2.3.0",
     "shelljs": "^0.7.6"
   },
   "devDependencies": {

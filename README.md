@@ -2,7 +2,7 @@
 
 	sample usage:
 	
-		var builderFactory = require("@zeustrismegistus/module-builder").ModuleBuilder;
+		var builderFactory = require("d__module-builder").ModuleBuilder;
 		builder = builderFactory('./generatedModule');
 		builder.initFolder();
 		builder.setName('tempService');
