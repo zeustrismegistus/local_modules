@@ -1,4 +1,6 @@
-# Node Service Builder - provides helper methods for programmatically creating node services on a file system somewhere
+# Node Service Builder - provides helper methods for programmatically creating node services on a file system somewhere.
+It is very yeti.  It copies the node, et.al executables to a folder, manually constructs files, shells out to npm to 
+resolve packages.  It's synchronous because slack.    
 
 	sample usage:
 	
